@@ -1,0 +1,8 @@
+
+type Country @extends {
+    code: String! @external
+}
+
+type Region @extends {
+    id: UUID! @external
+}

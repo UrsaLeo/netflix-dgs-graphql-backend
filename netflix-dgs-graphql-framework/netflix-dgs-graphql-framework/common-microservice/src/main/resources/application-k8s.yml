@@ -1,0 +1,35 @@
+server:
+  port: 9000
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+  jpa:
+    properties:
+      repository_package: com.iamdinuth.commonmicroservice.data.repository
+      hibernate:
+        default_schema: upwork
+        dialect: org.hibernate.dialect.PostgreSQLDialect # org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: none
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+    com:
+      iamdinuth:
+        countrymicroservice: DEBUG
+
+keycloak:
+  realm: Test
+  auth-server-url: ${KEYCLOAK_URL}
+  ssl-required: external
+  resource: ${KEYCLOAK_CLIENT_ID}
+  credentials:
+    secret: ${KEYCLOAK_CLIENT_SECRET}
+  use-resource-role-mappings: false
+  bearer-only: true

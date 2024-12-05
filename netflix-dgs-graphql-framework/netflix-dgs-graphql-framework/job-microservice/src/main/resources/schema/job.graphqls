@@ -1,0 +1,28 @@
+type Job @key(fields: "id"){
+    id: UUID!
+    title: String!
+    description: String
+    jobStatus: JobStatus!
+#    countryCode: String
+    country: Country @transient
+    region: Region @transient
+}
+
+enum JobStatus{
+    DRAFT, NEW, VERIFIED, IN_PROGRESS, COMPLETED, CANCELLED
+}
+
+extend type Query{
+    findAllJobs: [Job]
+}
+
+extend type Mutation{
+    putJob(jobInput:JobInput): Job
+}
+
+input JobInput {
+    id: UUID
+    title: String!
+    description: String!
+    jobStatus: JobStatus!
+}

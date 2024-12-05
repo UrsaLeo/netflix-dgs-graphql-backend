@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "target": "ES2016",
+        "module": "CommonJS",
+        "sourceMap": false,
+        "baseUrl": ".",
+        "rootDir": "./src",
+        "outDir": "./build",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true
+    },
+    "include": ["./src/**/*"],
+    "exclude": ["./node_modules"]
+}

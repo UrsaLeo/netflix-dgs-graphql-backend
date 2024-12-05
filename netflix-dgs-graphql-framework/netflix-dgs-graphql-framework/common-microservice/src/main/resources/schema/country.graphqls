@@ -1,0 +1,18 @@
+
+type Country @key(fields: "code"){
+    code: String!
+    name: String!
+    regionName: String
+    regions: [Region] @auth(role: "admin-user", throwError: true)
+    president: String @transient
+}
+
+extend type Query {
+    findAllCountries: [Country]
+    findRegionsForCountry(countryCode: String!):[Region]
+}
+
+input CountryInput {
+    code: String!
+    name: String!
+}

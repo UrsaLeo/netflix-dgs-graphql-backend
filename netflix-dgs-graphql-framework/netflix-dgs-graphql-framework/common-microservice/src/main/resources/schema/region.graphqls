@@ -1,0 +1,15 @@
+type Region @key(fields: "id"){
+    id: UUID!
+    name: String!
+    country: Country!
+}
+
+#type Region {
+#    id: UUID!
+#    name: String!
+#    country: Country!
+#}
+
+extend type Query {
+    findRegionById(id: UUID): Region
+}

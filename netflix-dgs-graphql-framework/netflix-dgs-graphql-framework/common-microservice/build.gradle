@@ -1,0 +1,64 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.7'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id "com.netflix.dgs.codegen" version "5.5.0"
+}
+
+group = 'com.iamdinuth'
+version = '0.0.1'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// GraphQL
+	implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:5.0.0"))
+	implementation "com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter:9.2.2"
+	implementation "com.graphql-java:graphql-java-extended-scalars:19.0"
+	implementation "com.graphql-java:graphql-java-extended-validation:19.0"
+	// JPA
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+	runtimeOnly "org.postgresql:postgresql"
+	implementation "com.cosium.spring.data:spring-data-jpa-entity-graph:2.7.7"
+	// Security
+	implementation(platform("org.keycloak.bom:keycloak-adapter-bom:16.1.0"))
+	implementation "org.keycloak:keycloak-spring-boot-starter"
+	implementation "org.springframework.boot:spring-boot-starter-security"
+	implementation "org.keycloak:keycloak-admin-client:16.1.0"
+	// Utils
+	implementation "org.springframework.boot:spring-boot-starter-actuator"
+	compileOnly "org.projectlombok:lombok"
+	annotationProcessor "org.projectlombok:lombok"
+	// Test
+	testImplementation "org.springframework.boot:spring-boot-starter-test"
+	testCompileOnly "org.projectlombok:lombok"
+	testAnnotationProcessor "org.projectlombok:lombok"
+}
+
+
+
+
+dependencyManagement {
+	imports {
+		mavenBom "com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:5.0.0"
+		mavenBom "org.keycloak.bom:keycloak-adapter-bom:16.1.0"
+	}
+}
+
+generateJava{
+	typeMapping = [
+		"Long": "java.lang.Long",
+		"UUID": "java.util.UUID"
+	]
+	schemaPaths = ["${projectDir}/src/main/resources/schema"] // List of directories containing schema files
+	packageName = 'com.iamdinuth.commonmicroservice.graphql.generated' // The package name to use to generate sources
+	generateClient = true // Enable generating the type safe query API
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

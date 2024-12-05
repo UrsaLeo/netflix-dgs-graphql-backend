@@ -1,0 +1,11 @@
+scalar UUID
+type Query
+
+# Use the @transient directive to define non JPA fields in GraphQL types
+directive @transient on FIELD_DEFINITION
+
+# Use the @auth(role: rolename) directive to restrict fields based on Keycloak roles
+directive @auth(
+    role: String!
+    throwError: Boolean = false
+) on FIELD_DEFINITION | OBJECT

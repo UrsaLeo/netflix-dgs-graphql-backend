@@ -1,0 +1,35 @@
+server:
+  port: 9001
+
+spring:
+  datasource:
+    url: jdbc:postgresql://3.108.108.53:5432/test-netfilx-dgs
+    username: admin
+    password: 1234qwer$$
+  jpa:
+    properties:
+      repository_package: com.iamdinuth.jobmicroservice.data.repository
+      hibernate:
+#        default_schema: upwork
+        dialect: org.hibernate.dialect.PostgreSQLDialect # org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+    com:
+      iamdinuth:
+        jobmicroservice: DEBUG
+
+keycloak:
+  realm: Test
+  auth-server-url: https://sso.dev.mycompany.local/auth
+  ssl-required: external
+  resource: test-backend
+  credentials:
+    secret: atEvxu02XXvZVaW397sbxwUukgu0l1a8
+  use-resource-role-mappings: false
+  bearer-only: true
