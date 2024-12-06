@@ -3,12 +3,15 @@ package com.iamdinuth.commonmicroservice.graphql.resolver;
 import com.iamdinuth.commonmicroservice.data.entity.Client;
 import com.iamdinuth.commonmicroservice.data.service.ClientService;
 import com.iamdinuth.commonmicroservice.graphql.context.Context;
+import com.iamdinuth.commonmicroservice.graphql.generated.types.ClientInput;
+import com.iamdinuth.commonmicroservice.exception.BadInputError;
 import com.netflix.graphql.dgs.*;
 import com.netflix.graphql.dgs.context.DgsContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.UUID;
 
 @DgsComponent
 @Slf4j
@@ -23,8 +26,13 @@ public class ClientResolver {
 //        return clientService.findClientById((String) values.get("id"), dfe);
 //    }
 
+    @DgsMutation
+    public Client saveClient(@InputArgument ClientInput clientInput , DgsDataFetchingEnvironment dfe) throws BadInputError {
+        return clientService.saveClient(clientInput, dfe);
+    }
+
     @DgsQuery
-    public Client findClientById(@InputArgument String id, DgsDataFetchingEnvironment dfe) {
+    public Client findClientById(@InputArgument UUID id, DgsDataFetchingEnvironment dfe) {
         log.debug("Fetching client with ID: " + id);
         return clientService.findClientById(id, dfe);
     }

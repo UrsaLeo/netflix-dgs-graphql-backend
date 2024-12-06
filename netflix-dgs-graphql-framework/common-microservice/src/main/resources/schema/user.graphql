@@ -9,6 +9,25 @@ type User {
 
 extend type Query {
     findAllUsers: [User]
-    findUsersforClient(clientId: String!):[User]
+    findUsersforClient(clientId: UUID!):[User]
 }
 
+extend type Mutation{
+    saveUser(userInput:UserInput): User
+    deleteUser(userId: UUID!): MutationResponse
+}
+
+input UserInput{
+    userId: UUID
+    firstName: String!
+    lastName: String!
+    email: String!
+    phone: String!
+    client: ClientIdInput
+}
+
+type MutationResponse {
+    success: Boolean!
+    message: String!
+    statusCode: Int!
+}

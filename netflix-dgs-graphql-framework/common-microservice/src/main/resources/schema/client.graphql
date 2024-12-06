@@ -1,5 +1,5 @@
 type Client @key(fields: "id"){
-    id: ID!
+    id: UUID!
     name: String!
     address: String
 }
@@ -9,8 +9,18 @@ extend type Query {
     findClientById(id: String): Client
 }
 
+type Mutation{
+    saveClient(clientInput:ClientInput): Client
+}
+
 input ClientInput {
     id: UUID
     name: String!
     address: String
 }
+
+input ClientIdInput {
+    id: UUID
+}
+
+

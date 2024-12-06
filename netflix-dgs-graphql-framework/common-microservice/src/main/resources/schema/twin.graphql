@@ -10,5 +10,21 @@ type Twin {
 
 extend type Query {
     findAllTwins: [Twin]
-    findTwinsforClient(clientId: String!):[Twin]
+    findTwinsforClient(clientId: UUID!):[Twin]
 }
+
+extend type Mutation{
+    saveTwin(twinInput:TwinInput): Twin
+    deleteTwin(twinId: UUID!): MutationResponse
+}
+
+input TwinInput {
+    twinId: UUID
+    twinName: String!
+    description: String
+    latitude: Float
+    longitude: Float
+    uri: String
+    client: ClientIdInput
+}
+

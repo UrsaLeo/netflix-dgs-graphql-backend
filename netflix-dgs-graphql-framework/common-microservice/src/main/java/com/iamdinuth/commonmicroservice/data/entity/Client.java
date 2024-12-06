@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "clients")
@@ -16,8 +17,8 @@ import java.util.List;
 public class Client {
 
     @Id
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String name;

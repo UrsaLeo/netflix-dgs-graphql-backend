@@ -7,11 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface ClientRepository extends EntityGraphJpaRepository<Client, String> {
+public interface ClientRepository extends EntityGraphJpaRepository<Client, UUID> {
     List<Client> findAll(EntityGraph entityGraph);
 
-    Optional<Client> findById(String id, EntityGraph entityGraph);
+    Optional<Client> findById(UUID id, EntityGraph entityGraph);
 
 }

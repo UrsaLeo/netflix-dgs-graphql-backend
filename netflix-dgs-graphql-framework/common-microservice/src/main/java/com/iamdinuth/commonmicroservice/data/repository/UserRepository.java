@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -14,5 +15,7 @@ public interface UserRepository extends EntityGraphJpaRepository<User, UUID> {
     List<User> findAll(EntityGraph entityGraph);
 
     @Query("SELECT u FROM User u WHERE u.client.id=:clientId")
-    List<User> findUsersForClient(String clientId, EntityGraph entityGraph);
+    List<User> findUsersForClient(UUID clientId, EntityGraph entityGraph);
+
+    Optional<User> findById(UUID id, EntityGraph entityGraph);
 }
