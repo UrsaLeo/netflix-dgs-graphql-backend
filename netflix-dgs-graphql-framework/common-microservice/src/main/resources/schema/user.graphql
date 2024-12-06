@@ -1,0 +1,14 @@
+type User {
+    userId: UUID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    phone: String!
+    client: Client!
+}
+
+extend type Query {
+    findAllUsers: [User]
+    findUsersforClient(clientId: String!):[User]
+}
+

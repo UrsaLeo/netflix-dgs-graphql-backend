@@ -1,0 +1,14 @@
+type Twin {
+    twinId: UUID!
+    twinName: String!
+    description: String
+    latitude: Float
+    longitude: Float
+    uri: String
+    client: Client  # Optional: If a client is associated with the twin
+}
+
+extend type Query {
+    findAllTwins: [Twin]
+    findTwinsforClient(clientId: String!):[Twin]
+}

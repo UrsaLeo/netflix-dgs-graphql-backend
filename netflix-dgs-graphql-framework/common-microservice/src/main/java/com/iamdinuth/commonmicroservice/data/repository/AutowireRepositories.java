@@ -8,6 +8,15 @@ public class AutowireRepositories {
     public CountryRepository countryRepository;
     @Autowired
     public RegionRepository regionRepository;
+
+    @Autowired
+    public ClientRepository clientRepository;
+
+    @Autowired
+    public UserRepository userRepository;
+
+    @Autowired
+    public TwinRepository twinRepository;
     @Autowired
     public EntityGraphBuilder egb;
 }

@@ -1,0 +1,16 @@
+type Client @key(fields: "id"){
+    id: ID!
+    name: String!
+    address: String
+}
+
+extend type Query {
+    findAllClients: [Client]
+    findClientById(id: String): Client
+}
+
+input ClientInput {
+    id: UUID
+    name: String!
+    address: String
+}
