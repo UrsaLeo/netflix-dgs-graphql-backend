@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  keycloak_legacy:
+    image: quay.io/keycloak/keycloak:21.1.1
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    command:
+      - start-dev
+    ports:
+      - "8082:8080"
+    volumes:
+      - keycloak_legacy_data:/opt/keycloak/data
+    restart: unless-stopped
+
+volumes:
+  keycloak_legacy_data:
+    driver: local
+
+

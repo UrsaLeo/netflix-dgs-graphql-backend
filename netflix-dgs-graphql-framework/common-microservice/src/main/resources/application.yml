@@ -26,10 +26,12 @@ logging:
 
 keycloak:
   realm: Test
-  auth-server-url: https://sso.dev.mycompany.local/auth
+  auth-server-url: http://localhost:8082
   ssl-required: external
   resource: test-backend
   credentials:
-    secret: atEvxu02XXvZVaW397sbxwUukgu0l1a8
+    secret: 0yIsBx0rB9PmUVurDjMWK4azc4tgDvIJ
   use-resource-role-mappings: false
+  public-client: true
   bearer-only: true
+

@@ -10,6 +10,7 @@ import com.netflix.graphql.dgs.context.DgsContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,17 +28,20 @@ public class ClientResolver {
 //    }
 
     @DgsMutation
+    @RolesAllowed("admin")
     public Client saveClient(@InputArgument ClientInput clientInput , DgsDataFetchingEnvironment dfe) throws BadInputError {
         return clientService.saveClient(clientInput, dfe);
     }
 
     @DgsQuery
+    @RolesAllowed("admin")
     public Client findClientById(@InputArgument UUID id, DgsDataFetchingEnvironment dfe) {
         log.debug("Fetching client with ID: " + id);
         return clientService.findClientById(id, dfe);
     }
 
     @DgsQuery
+    @RolesAllowed("admin")
     public List<Client> findAllClients(DgsDataFetchingEnvironment dfe) {
         Context customContext = DgsContext.getCustomContext(dfe);
         log.debug(customContext.getKeycloakUserData().toString());

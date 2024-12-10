@@ -29,16 +29,18 @@ public class UserResolver {
     }
 
     @DgsMutation
+    @RolesAllowed("admin")
     public User saveUser(@InputArgument UserInput userInput , DgsDataFetchingEnvironment dfe) throws BadInputError {
         return userService.saveUser(userInput, dfe);
     }
     @DgsMutation
+    @RolesAllowed("admin")
     public MutationResponse deleteUser(@InputArgument UUID userId, DgsDataFetchingEnvironment dfe) throws BadInputError{
         return userService.deleteUser(userId, dfe);
     }
 
     @DgsQuery
-//    @RolesAllowed("admin-user")
+    @RolesAllowed("admin")
     public List<User> findUsersforClient(@InputArgument UUID clientId, DgsDataFetchingEnvironment dfe) {
         return userService.findUsersForClient(clientId, dfe);
     }
