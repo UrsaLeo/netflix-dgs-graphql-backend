@@ -3,7 +3,7 @@ package com.iamdinuth.commonmicroservice.data.service;
 import com.iamdinuth.commonmicroservice.data.entity.Client;
 import com.iamdinuth.commonmicroservice.data.repository.AutowireRepositories;
 import com.iamdinuth.commonmicroservice.exception.BadInputError;
-import com.iamdinuth.commonmicroservice.graphql.generated.types.ClientInput;
+import com.iamdinuth.commonmicroservice.data.types.ClientInput;
 import com.netflix.graphql.dgs.DgsDataFetchingEnvironment;
 import graphql.execution.ResultPath;
 import org.springframework.stereotype.Service;

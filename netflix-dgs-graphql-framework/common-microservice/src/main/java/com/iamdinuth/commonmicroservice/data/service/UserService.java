@@ -5,9 +5,9 @@ import com.iamdinuth.commonmicroservice.data.entity.User;
 import com.iamdinuth.commonmicroservice.data.repository.AutowireRepositories;
 import com.iamdinuth.commonmicroservice.exception.BadInputError;
 import com.iamdinuth.commonmicroservice.graphql.generated.DgsConstants;
-import com.iamdinuth.commonmicroservice.graphql.generated.types.ClientIdInput;
-import com.iamdinuth.commonmicroservice.graphql.generated.types.MutationResponse;
-import com.iamdinuth.commonmicroservice.graphql.generated.types.UserInput;
+import com.iamdinuth.commonmicroservice.data.types.ClientIdInput;
+import com.iamdinuth.commonmicroservice.data.types.MutationResponse;
+import com.iamdinuth.commonmicroservice.data.types.UserInput;
 import com.netflix.graphql.dgs.DgsDataFetchingEnvironment;
 import graphql.execution.ResultPath;
 import graphql.language.SourceLocation;
@@ -26,7 +26,7 @@ public class UserService extends AutowireRepositories {
 
     public User saveUser(UserInput userInput, DgsDataFetchingEnvironment dfe) throws BadInputError {
         if (userInput.getUserId() == null){
-            // Create Twin
+            // Create User
             ClientIdInput clientIdInput = userInput.getClient();
 
             Client client = new Client();

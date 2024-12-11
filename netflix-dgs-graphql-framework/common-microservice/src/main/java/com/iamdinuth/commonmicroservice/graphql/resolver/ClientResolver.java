@@ -3,7 +3,7 @@ package com.iamdinuth.commonmicroservice.graphql.resolver;
 import com.iamdinuth.commonmicroservice.data.entity.Client;
 import com.iamdinuth.commonmicroservice.data.service.ClientService;
 import com.iamdinuth.commonmicroservice.graphql.context.Context;
-import com.iamdinuth.commonmicroservice.graphql.generated.types.ClientInput;
+import com.iamdinuth.commonmicroservice.data.types.ClientInput;
 import com.iamdinuth.commonmicroservice.exception.BadInputError;
 import com.netflix.graphql.dgs.*;
 import com.netflix.graphql.dgs.context.DgsContext;
