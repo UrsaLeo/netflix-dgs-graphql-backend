@@ -35,3 +35,18 @@ keycloak:
   public-client: true
   bearer-only: true
 
+
+dgs:
+  graphql:
+    cors:
+      allow-credentials: true
+      allowed-origins: http://localhost:5173
+      allowed-methods:
+        - GET
+        - POST
+        - OPTIONS
+      allowed-headers:
+        - Content-Type
+        - Authorization
+
+
