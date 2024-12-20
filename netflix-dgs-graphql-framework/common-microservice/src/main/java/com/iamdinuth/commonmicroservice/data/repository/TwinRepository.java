@@ -19,5 +19,5 @@ public interface TwinRepository extends EntityGraphJpaRepository<Twin, UUID> {
     @Query("SELECT t FROM Twin t WHERE t.client.id=:clientId")
     List<Twin> findTwinsForClient(UUID clientId, EntityGraph entityGraph);
 
-    Optional<Twin> findById(UUID id, EntityGraph entityGraph);
+    Optional<Twin> findById(UUID twinId, EntityGraph entityGraph);
 }

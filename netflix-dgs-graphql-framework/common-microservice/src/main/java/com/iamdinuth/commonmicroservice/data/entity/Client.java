@@ -28,5 +28,5 @@ public class Client {
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     @ToString.Exclude
-    private List<User> users;
+    private List<Twin> twins;
 }

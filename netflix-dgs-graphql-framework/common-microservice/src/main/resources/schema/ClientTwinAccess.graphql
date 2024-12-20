@@ -1,0 +1,23 @@
+type ClientTwinAccess {
+    id: UUID!
+    client: Client
+    twin: Twin
+    user: User!
+    role: Role!
+}
+
+extend type Query {
+    findAssinedUsersForTwin(twinId: UUID!):[ClientTwinAccess]
+}
+
+extend type Mutation {
+    assignUserToTwin(assignUserToTwinInput: AssignUserToTwinInput): ClientTwinAccess
+    unassignedUser(id: UUID!): MutationResponse
+}
+
+input AssignUserToTwinInput {
+    id: UUID
+    twinId: UUID
+    userEmail: String!
+    roleDescription: String!
+}

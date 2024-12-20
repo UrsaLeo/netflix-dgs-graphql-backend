@@ -14,8 +14,10 @@ import java.util.UUID;
 public interface UserRepository extends EntityGraphJpaRepository<User, UUID> {
     List<User> findAll(EntityGraph entityGraph);
 
-    @Query("SELECT u FROM User u WHERE u.client.id=:clientId")
-    List<User> findUsersForClient(UUID clientId, EntityGraph entityGraph);
+//    @Query("SELECT u FROM User u WHERE u.client.id=:clientId")
+//    List<User> findUsersForClient(UUID clientId, EntityGraph entityGraph);
 
     Optional<User> findById(UUID id, EntityGraph entityGraph);
+
+    Optional<User> findByEmail(String email);
 }

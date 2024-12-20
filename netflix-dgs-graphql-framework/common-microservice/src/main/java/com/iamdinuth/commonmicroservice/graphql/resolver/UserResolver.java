@@ -29,7 +29,7 @@ public class UserResolver {
     }
 
     @DgsMutation
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public User saveUser(@InputArgument UserInput userInput , DgsDataFetchingEnvironment dfe) throws BadInputError {
         return userService.saveUser(userInput, dfe);
     }
@@ -39,9 +39,9 @@ public class UserResolver {
         return userService.deleteUser(userId, dfe);
     }
 
-    @DgsQuery
-    @RolesAllowed("admin")
-    public List<User> findUsersforClient(@InputArgument UUID clientId, DgsDataFetchingEnvironment dfe) {
-        return userService.findUsersForClient(clientId, dfe);
-    }
+//    @DgsQuery
+//    @RolesAllowed("admin")
+//    public List<User> findUsersforClient(@InputArgument UUID clientId, DgsDataFetchingEnvironment dfe) {
+//        return userService.findUsersForClient(clientId, dfe);
+//    }
 }

@@ -68,6 +68,15 @@ public class TwinService extends AutowireRepositories {
         return twinRepository.findTwinsForClient(clientId, egb.build(dfe));
     }
 
+    public Twin findTwinById(UUID twinId, DgsDataFetchingEnvironment dfe) {
+        Optional<Twin> twinById = twinRepository.findById(twinId, egb.build(dfe));
+        if (twinById.isPresent()){
+            return twinById.get();
+        } else {
+            return null;
+        }
+    }
+
     public MutationResponse deleteTwin(UUID twinId, DgsDataFetchingEnvironment dfe){
         try {
             // Check if the Twin exists

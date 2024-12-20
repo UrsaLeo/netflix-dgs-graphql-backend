@@ -2,6 +2,7 @@ package com.iamdinuth.commonmicroservice.data.service;
 
 import com.iamdinuth.commonmicroservice.data.entity.Client;
 import com.iamdinuth.commonmicroservice.data.repository.AutowireRepositories;
+import com.iamdinuth.commonmicroservice.data.types.MutationResponse;
 import com.iamdinuth.commonmicroservice.exception.BadInputError;
 import com.iamdinuth.commonmicroservice.data.types.ClientInput;
 import com.netflix.graphql.dgs.DgsDataFetchingEnvironment;
@@ -50,6 +51,21 @@ public class ClientService extends AutowireRepositories {
             return clientById.get();
         } else {
             return null;
+        }
+    }
+
+    public MutationResponse deleteClient(UUID id, DgsDataFetchingEnvironment dfe){
+        try {
+            // Check if the client exists
+            Client client = clientRepository.findById(id).orElse(null);
+            if (client == null) {
+                return new MutationResponse(false, "Client not found.", 404);
+            }
+            // Delete the client
+            clientRepository.delete(client);
+            return new MutationResponse(true, "Client deleted successfully.", 200);
+        } catch (Exception e) {
+            return new MutationResponse(false, "Error deleting client: " + e.getMessage(), 500);
         }
     }
 }

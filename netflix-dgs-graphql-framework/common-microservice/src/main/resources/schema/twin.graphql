@@ -11,6 +11,7 @@ type Twin {
 extend type Query {
     findAllTwins: [Twin]
     findTwinsforClient(clientId: UUID!):[Twin]
+    findTwinById(twinId: UUID!): Twin
 }
 
 extend type Mutation{

@@ -1,5 +1,6 @@
 package com.iamdinuth.commonmicroservice.graphql.resolver;
 
+import com.iamdinuth.commonmicroservice.data.entity.Client;
 import com.iamdinuth.commonmicroservice.data.entity.Twin;
 import com.iamdinuth.commonmicroservice.data.service.TwinService;
 import com.iamdinuth.commonmicroservice.exception.BadInputError;
@@ -29,20 +30,27 @@ public class TwinResolver {
         return twinService.findAll(dfe);
     }
 
+    @DgsQuery
+//    @RolesAllowed("admin")
+    public Twin findTwinById(@InputArgument UUID twinId, DgsDataFetchingEnvironment dfe) {
+        log.debug("Fetching twin with ID: " + twinId);
+        return twinService.findTwinById(twinId, dfe);
+    }
+
     @DgsMutation
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public Twin saveTwin(@InputArgument TwinInput twinInput , DgsDataFetchingEnvironment dfe) throws BadInputError {
         return twinService.saveTwin(twinInput, dfe);
     }
 
     @DgsMutation
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public MutationResponse deleteTwin(@InputArgument UUID twinId, DgsDataFetchingEnvironment dfe) throws BadInputError{
         return twinService.deleteTwin(twinId, dfe);
     }
 
     @DgsQuery
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public List<Twin> findTwinsforClient(@InputArgument UUID clientId, DgsDataFetchingEnvironment dfe) {
         return twinService.findTwinsForClient(clientId, dfe);
     }

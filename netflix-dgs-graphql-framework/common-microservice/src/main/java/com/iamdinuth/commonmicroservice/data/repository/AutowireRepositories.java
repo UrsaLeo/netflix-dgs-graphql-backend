@@ -1,5 +1,6 @@
 package com.iamdinuth.commonmicroservice.data.repository;
 
+import com.iamdinuth.commonmicroservice.data.entity.Client;
 import com.iamdinuth.commonmicroservice.data.util.EntityGraphBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,6 +18,9 @@ public class AutowireRepositories {
 
     @Autowired
     public TwinRepository twinRepository;
+    @Autowired
+    public ClientTwinAccessRepository clientTwinAccessRepository;
+
     @Autowired
     public EntityGraphBuilder egb;
 }

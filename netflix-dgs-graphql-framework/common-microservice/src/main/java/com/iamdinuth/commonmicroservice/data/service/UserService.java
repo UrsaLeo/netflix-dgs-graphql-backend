@@ -27,34 +27,22 @@ public class UserService extends AutowireRepositories {
     public User saveUser(UserInput userInput, DgsDataFetchingEnvironment dfe) throws BadInputError {
         if (userInput.getUserId() == null){
             // Create User
-            ClientIdInput clientIdInput = userInput.getClient();
-
-            Client client = new Client();
-            client.setId(clientIdInput.getId());
-
             User user = new User();
             user.setFirstName(userInput.getFirstName());
             user.setLastName(userInput.getLastName());
             user.setEmail(userInput.getEmail());
             user.setPhone(userInput.getPhone());
-            user.setClient(client);
             return userRepository.save(user);
         }
         else {
             // Update twin
             Optional<User> userById = userRepository.findById(userInput.getUserId());
             if (userById.isPresent()){
-                ClientIdInput clientIdInput = userInput.getClient();
-
-                Client client = new Client();
-                client.setId(clientIdInput.getId());
-
                 User user =  userById.get();
                 user.setFirstName(userInput.getFirstName());
                 user.setLastName(userInput.getLastName());
                 user.setEmail(userInput.getEmail());
                 user.setPhone(userInput.getPhone());
-                user.setClient(client);
                 return userRepository.save(user);
             } else {
                 List<SourceLocation> locations =  List.of(dfe.getField().getSourceLocation());
@@ -65,9 +53,9 @@ public class UserService extends AutowireRepositories {
     }
 
 
-    public List<User> findUsersForClient(UUID clientId, DgsDataFetchingEnvironment dfe) {
-        return userRepository.findUsersForClient(clientId, egb.build(dfe));
-    }
+//    public List<User> findUsersForClient(UUID clientId, DgsDataFetchingEnvironment dfe) {
+//        return userRepository.findUsersForClient(clientId, egb.build(dfe));
+//    }
 
     public MutationResponse deleteUser(UUID userId, DgsDataFetchingEnvironment dfe){
         try {

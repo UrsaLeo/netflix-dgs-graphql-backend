@@ -30,9 +30,4 @@ public class User {
 
     @Column(nullable = false, unique = true, columnDefinition = "TEXT")
     private String phone;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "client_id", nullable = false)
-    @ToString.Exclude
-    private Client client;
 }

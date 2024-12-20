@@ -11,6 +11,7 @@ extend type Query {
 
 type Mutation{
     saveClient(clientInput:ClientInput): Client
+    deleteClient(id: UUID!): MutationResponse
 }
 
 input ClientInput {

@@ -2,6 +2,7 @@ package com.iamdinuth.commonmicroservice.graphql.resolver;
 
 import com.iamdinuth.commonmicroservice.data.entity.Client;
 import com.iamdinuth.commonmicroservice.data.service.ClientService;
+import com.iamdinuth.commonmicroservice.data.types.MutationResponse;
 import com.iamdinuth.commonmicroservice.graphql.context.Context;
 import com.iamdinuth.commonmicroservice.data.types.ClientInput;
 import com.iamdinuth.commonmicroservice.exception.BadInputError;
@@ -33,6 +34,12 @@ public class ClientResolver {
         return clientService.saveClient(clientInput, dfe);
     }
 
+    @DgsMutation
+    @RolesAllowed("admin")
+    public MutationResponse deleteClient(@InputArgument UUID id, DgsDataFetchingEnvironment dfe) throws BadInputError{
+        return clientService.deleteClient(id, dfe);
+    }
+
     @DgsQuery
     @RolesAllowed("admin")
     public Client findClientById(@InputArgument UUID id, DgsDataFetchingEnvironment dfe) {
@@ -41,7 +48,7 @@ public class ClientResolver {
     }
 
     @DgsQuery
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public List<Client> findAllClients(DgsDataFetchingEnvironment dfe) {
         Context customContext = DgsContext.getCustomContext(dfe);
         log.debug(customContext.getKeycloakUserData().toString());
