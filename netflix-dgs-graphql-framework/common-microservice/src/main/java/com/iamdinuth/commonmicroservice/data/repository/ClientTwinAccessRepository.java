@@ -20,5 +20,5 @@ public interface ClientTwinAccessRepository  extends JpaRepository<ClientTwinAcc
 
     Optional<ClientTwinAccess> findById(UUID id, EntityGraph entityGraph);
 
-    boolean existsByTwinAndUserAndRole(Twin twin, User user, Role role);
+    boolean existsByTwinAndUser(Twin twin, User user);
 }

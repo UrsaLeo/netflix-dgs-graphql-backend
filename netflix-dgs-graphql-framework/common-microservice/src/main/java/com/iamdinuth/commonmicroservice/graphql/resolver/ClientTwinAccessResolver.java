@@ -6,6 +6,7 @@ import com.iamdinuth.commonmicroservice.data.service.ClientTwinAccessService;
 import com.iamdinuth.commonmicroservice.data.types.MutationResponse;
 import com.iamdinuth.commonmicroservice.exception.BadInputError;
 import com.iamdinuth.commonmicroservice.graphql.generated.types.AssignUserToTwinInput;
+import com.iamdinuth.commonmicroservice.graphql.generated.types.UpdateUserToTwinInput;
 import com.netflix.graphql.dgs.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,20 @@ public class ClientTwinAccessResolver {
     @Autowired
     private ClientTwinAccessService clientTwinAccessService;
 
+    @DgsQuery
+    public ClientTwinAccess findAssignedUserById(@InputArgument UUID id) {
+        return clientTwinAccessService.findAssignedUserById(id);
+    }
+
     @DgsMutation
     public ClientTwinAccess assignUserToTwin(@InputArgument AssignUserToTwinInput assignUserToTwinInput) {
         return clientTwinAccessService.assignUserToTwin(assignUserToTwinInput.getTwinId(), assignUserToTwinInput.getUserEmail(), assignUserToTwinInput.getRoleDescription());
+    }
+
+
+    @DgsMutation
+    public ClientTwinAccess updateAccessLevelForUser(@InputArgument UpdateUserToTwinInput updateUserToTwinInput) {
+        return clientTwinAccessService.updateAccessLevelForUser(updateUserToTwinInput.getId(), updateUserToTwinInput.getRoleDescription());
     }
 
     @DgsMutation

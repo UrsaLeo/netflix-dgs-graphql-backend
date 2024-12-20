@@ -35,7 +35,11 @@ public class ClientTwinAccessService extends AutowireRepositories {
         return clientTwinAccessRepository.findAssinedUsersForTwin(twinId, egb.build(dfe));
     }
 
-
+    public ClientTwinAccess findAssignedUserById(UUID id) {
+        // Find the ClientTwinAccess entry by ID
+        return clientTwinAccessRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found."));
+    }
 
     public ClientTwinAccess assignUserToTwin(UUID twinId, String userEmail, String roleDescription) {
         // Find the twin
@@ -53,12 +57,32 @@ public class ClientTwinAccessService extends AutowireRepositories {
         // Optional: Retrieve client associated with the twin
         Client client = twin.getClient();
 
+        boolean alreadyAssigned = clientTwinAccessRepository.existsByTwinAndUser(twin, user);
+        if (alreadyAssigned) {
+            throw new IllegalStateException(
+                    String.format("User '%s' is already assigned to this twin.", userEmail)
+            );
+        }
+
         // Create and save the ClientTwinAccess entry
         ClientTwinAccess clientTwinAccess = new ClientTwinAccess();
         clientTwinAccess.setClient(client); // Can be null if no client is associated
         clientTwinAccess.setTwin(twin);
         clientTwinAccess.setUser(user);
         clientTwinAccess.setRole(role);
+
+        return clientTwinAccessRepository.save(clientTwinAccess);
+    }
+
+    public ClientTwinAccess updateAccessLevelForUser(UUID id, String newRoleDescription) {
+        // Find the existing ClientTwinAccess record by id
+        ClientTwinAccess clientTwinAccess = clientTwinAccessRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User is not assigned to the Twin "));
+
+        Role newRole = roleRepository.findByDescription(newRoleDescription)
+                .orElseThrow(() -> new EntityNotFoundException("Role not found with description: " + newRoleDescription));
+
+        clientTwinAccess.setRole(newRole);
 
         return clientTwinAccessRepository.save(clientTwinAccess);
     }
